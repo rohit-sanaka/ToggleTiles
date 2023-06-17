@@ -4,7 +4,6 @@ export default function App() {
   const initialBoxesArray = [[1, 2, 3], [4], [5, 6, 7]];
   const [clickedBoxed, setClickedBoxes] = useState([]);
 
-  console.log(clickedBoxed);
   // Box component start
   const Box = ({ id }) => {
     const boxStyle = {
@@ -32,13 +31,22 @@ export default function App() {
   }; // End of box component
 
   if (clickedBoxed.length === initialBoxesArray.flat().length) {
+    console.log(clickedBoxed);
+
     for (let i = 1; i <= initialBoxesArray.flat().length; i++) {
       setTimeout(() => {
-        const arr = clickedBoxed.slice(i);
-        setClickedBoxes(arr);
+        const arr = clickedBoxed;
+        arr.shift();
+        setClickedBoxes([...arr]);
       }, i * 1000);
     }
   }
+
+  /**
+   * using setInterval but not the complete solution.
+   *
+   * We can update a state variable directly inside setInterval
+   */
 
   // let timer;
   // const ToggleTiles = () => {
